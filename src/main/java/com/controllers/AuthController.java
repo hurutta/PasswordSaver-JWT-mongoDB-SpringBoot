@@ -67,16 +67,15 @@ public class AuthController {
 		{
 			return ResponseEntity
 					.badRequest()
-					.body(new MessageResponse("Error: Username is already taken!"));
+					.body(new MessageResponse("Username not availabe, try different"));
 		}
 
 
-		// Create new user's account
 		User user = new User(signUpRequest.getUsername(), 
 							 encoder.encode(signUpRequest.getPassword()));
 		
 		userRepository.save(user);
 
-		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+		return ResponseEntity.ok(new MessageResponse("Signup done, signin to use"));
 	}
 }

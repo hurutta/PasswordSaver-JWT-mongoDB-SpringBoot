@@ -3,7 +3,6 @@ package com.security.services;
 import com.repository.CredentialRepository;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import com.models.Credential;
 
@@ -42,9 +41,12 @@ public class UserServiceImpl
     }
 
 
-    public void updateCredential(Credential credential) 
+    public Credential updateCredential(Credential credential) 
     {
-        credentialRepository.save(credential);
+        Credential found = credentialRepository.findCredentials(credential.getUsername(), credential.getWebsiteUrl());
+        found.setPasscode(credential.getPasscode());
+        credentialRepository.save(found);
+        return found;
     }
     
 }

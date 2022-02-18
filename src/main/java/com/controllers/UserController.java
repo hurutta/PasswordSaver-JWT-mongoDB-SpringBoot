@@ -22,19 +22,12 @@ import org.springframework.security.core.Authentication;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/test")
-public class TestController 
+@RequestMapping("/api/user")
+public class UserController 
 {
 
 	@Autowired
     public UserServiceImpl userServiceImpl;
-
-
-	@GetMapping("/all2")
-	public String allAccess() 
-	{
-		return "Public Content.";
-	}
 	
 	@GetMapping("/all")
 	@PreAuthorize("isFullyAuthenticated()")
@@ -61,10 +54,10 @@ public class TestController
 
 	@PutMapping("/update")
 	@PreAuthorize("isFullyAuthenticated()")
-	public void updateCredential(Authentication authentication,@RequestBody Credential credential) 
+	public Credential updateCredential(Authentication authentication,@RequestBody Credential credential) 
 	{
 		credential.setUsername(authentication.getName());
-		userServiceImpl.updateCredential(credential);
+		return userServiceImpl.updateCredential(credential);
 	}
 	
 

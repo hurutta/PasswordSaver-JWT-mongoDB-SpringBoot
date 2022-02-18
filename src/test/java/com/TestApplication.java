@@ -1,13 +1,20 @@
 package com;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+import org.junit.runner.notification.Failure;
 
-@SpringBootTest
-class TestApplication {
-
-	@Test
-	void contextLoads() {
+class TestApplication 
+{
+	public static void main(String[] args) 
+	{
+		Result result = JUnitCore.runClasses(TestUserService.class);
+      
+		for(Failure failure : result.getFailures()) 
+		{
+		   	System.out.println(failure.toString());
+		}
+		System.out.println(result.wasSuccessful());	
 	}
 
 }
